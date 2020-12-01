@@ -56,9 +56,9 @@ Below is a quick outline of the structure of the app:
 
 ### 1. Prerequisites
 
+* Install [NodeJS 12.6.0+](https://nodejs.org/en/download/).
 * Install [Yarn](https://yarnpkg.com/).
 * Install [Docker](https://docs.docker.com/get-docker/).
-* Install [Docker Compose](https://docs.docker.com/compose/install/).
 
 ### 2. Setup
 
