@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+source ./scripts/set_vars.sh
 
 ###
 # Creates a temporary PostgreSQL container and runs tests.
@@ -14,11 +16,13 @@ function read_env_file {
 # Main function
 ##
 function main {
+  set_vars
+
   # Read test env file
   read_env_file
 
   # Run tests.
-  jest --runInBand
+  "${BIN_PATH}"/jest --runInBand
 }
 
 # And so, it begins...
