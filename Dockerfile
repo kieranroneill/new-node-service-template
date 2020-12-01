@@ -7,10 +7,10 @@ FROM node:12.6.0 AS builder
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install all dependencies.
-COPY package* /tmp/
-COPY .npmrc /tmp/
+COPY package.json /tmp/
+COPY yarn.lock /tmp/
 RUN cd /tmp && \
-    npm install --production=false
+    yarn install
 RUN mkdir -p /build && \
     cp -a /tmp/node_modules /build/
 
@@ -26,7 +26,13 @@ RUN ./scripts/build.sh
 ############################
 FROM node:12.6.0-alpine
 
-ENV NODE_ENV production
+ARG SERVICE_NAME
+ARG NODE_ENV
+ARG PORT
+
+ENV SERVICE_NAME=$SERVICE_NAME
+ENV NODE_ENV=$NODE_ENV
+ENV PORT=$PORT
 
 # Get distro depencdencies
 RUN apk add --no-cache --upgrade bash
@@ -34,11 +40,11 @@ RUN apk add --no-cache --upgrade bash
 WORKDIR /usr/app
 
 # Install production only dependenices
-COPY --from=builder /build/package* /usr/app/
-RUN npm install --production=true
+COPY --from=builder /build/package.json /usr/app/
+COPY --from=builder /build/yarn.lock /usr/app/
+RUN yarn install --production
 
 # Copy build files and startup scripts.
-COPY --from=builder /build/.env /usr/app/
 COPY --from=builder /build/scripts/set_vars.sh /usr/app/scripts/
 COPY --from=builder /build/scripts/start.sh /usr/app/scripts/
 COPY --from=builder /build/dist /usr/app/dist

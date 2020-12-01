@@ -12,6 +12,9 @@ A template for creating new templates
     * [3. Running locally](#3-running-locally)
 * [Testing](#testing)
     * [1. Running tests](#1-running-tests)
+* [Deployment](#deployment)
+    * [1. Building the image](#1-building-the-image)
+    * [2. Running the image](#2-running-the-image)
 
 ## Introduction
 
@@ -59,20 +62,21 @@ Below is a quick outline of the structure of the app:
 
 ### 2. Setup
 
-1. Clone the [workspace2](https://github.com/ask-products/workspace2) repository.
-
-2. See [here](https://github.com/ask-products/workspace#set-up) for instructions on how to get the local askporter platform set-up.
+1. Install the dependencies:
+```bash
+yarn install
+```
 
 ### 3. Running locally
 
-1. From the *workspace2* directory, run:
+1. Simply run:
 ```bash
-docker-compose up applications_service
+yarn start
 ```
 
 2. You can check the API is running using the following cURL command:
 ```shell script
-curl -X GET http://localhost:3178/healthcheck
+curl -X GET http://localhost:${PORT}/healthcheck
 ```
 
 ## Testing
@@ -84,3 +88,27 @@ curl -X GET http://localhost:3178/healthcheck
 yarn test
 ```
 This will build and run a Postgres docker image and run the tests against it.
+
+## Deployment
+
+### 1. Building the image
+
+When building the Docker image, we want to inject env vars at build time, as the [`Dockerfile`](./Dockerfile) injects the build args as env vars into the container.
+```bash
+docker build \
+-t kieranroneill/new_service_template \
+--build-arg SERVICE_NAME=new-service-template \
+--build-arg NODE_ENV=production \
+--build-arg PORT=3000 \
+.
+```
+
+#### 2. Running the image
+
+```bash
+docker run \
+--name new_service_template \
+-it \
+-p 1337:${PORT} \
+kieranroneill/new_service_template:latest
+```
