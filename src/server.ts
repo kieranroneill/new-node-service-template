@@ -34,13 +34,15 @@ export class ExpressServer {
    */
   public async config(): Promise<void> {
     // Setup middleware.
-    this.app.use(morgan('combined', {
-      stream: {
-        write: (message: string) => {
-          this.logger.info(message);
+    this.app.use(
+      morgan('combined', {
+        stream: {
+          write: (message: string) => {
+            this.logger.info(message);
+          },
         },
-      },
-    }));
+      })
+    );
     this.app.use(json());
     this.app.use(urlencoded({ extended: true }));
 

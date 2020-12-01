@@ -1,12 +1,19 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowJs": true,
     "esModuleInterop": true,
     "lib": ["es6"],
     "module": "commonjs",
     "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "outDir": "dist",
     "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
     "target": "es6",
     "typeRoots": ["@types", "node_modules/@types"]
   },

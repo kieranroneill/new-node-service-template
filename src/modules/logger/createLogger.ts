@@ -1,8 +1,10 @@
-import { createLogger as createWinstonLogger, Logger, transports } from 'winston';
+import {
+  createLogger as createWinstonLogger,
+  Logger,
+  transports,
+} from 'winston';
 
-export default function createLogger(
-  name: string,
-): Logger {
+export default function createLogger(name: string): Logger {
   return createWinstonLogger({
     defaultMeta: {
       service: name,
