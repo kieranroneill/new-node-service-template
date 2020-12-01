@@ -1,8 +1,8 @@
 import { Application } from 'express';
 import { agent } from 'supertest';
 
-// Enums.
-import { ApiRoutes } from '../../enums';
+// Constants.
+import { Endpoints } from '../../constants';
 
 // Helpers.
 import { setupServer } from '../../../test/helpers';
@@ -11,7 +11,7 @@ interface Scope {
   app: Application;
 }
 
-describe(ApiRoutes.HealthCheck, () => {
+describe(Endpoints.HEALTHCHECK, () => {
   let scope: Scope;
 
   beforeEach(async () => {
@@ -22,9 +22,9 @@ describe(ApiRoutes.HealthCheck, () => {
     };
   });
 
-  describe(`GET ${ApiRoutes.HealthCheck}`, () => {
+  describe(`GET ${Endpoints.HEALTHCHECK}`, () => {
     it('should return a 200', async () => {
-      await agent(scope.app).get(ApiRoutes.HealthCheck).expect(200);
+      await agent(scope.app).get(Endpoints.HEALTHCHECK).expect(200);
     });
   });
 });
