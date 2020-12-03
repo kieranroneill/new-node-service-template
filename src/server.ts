@@ -30,9 +30,27 @@ export class ExpressServer {
   }
 
   /**
+   * Sets up all the API routes.
+   */
+  public api(): void {
+    const options: RouterOptions = {
+      logger: this.logger,
+    };
+
+    // Add routes.
+    this.app.use(
+      Endpoints.HEALTHCHECK,
+      healthcheckRouter(Endpoints.HEALTHCHECK, options)
+    );
+
+    // Error handling.
+    this.app.use(errorHandler(this.logger));
+  }
+
+  /**
    * Configures the application.
    */
-  public async config(): Promise<void> {
+  public config(): void {
     // Setup middleware.
     this.app.use(
       morgan('combined', {
@@ -66,23 +84,5 @@ export class ExpressServer {
         resolve();
       });
     });
-  }
-
-  /**
-   * Sets up all the routes.
-   */
-  public initRoutes(): void {
-    const options: RouterOptions = {
-      logger: this.logger,
-    };
-
-    // Add routes.
-    this.app.use(
-      Endpoints.HEALTHCHECK,
-      healthcheckRouter(Endpoints.HEALTHCHECK, options)
-    );
-
-    // Error handling.
-    this.app.use(errorHandler(this.logger));
   }
 }
