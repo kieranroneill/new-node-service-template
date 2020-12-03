@@ -26,7 +26,7 @@ export class ExpressServer {
 
   constructor() {
     this.app = Express();
-    this.logger = createLogger(process.env.SERVICE_NAME);
+    this.logger = createLogger(process.env.SERVICE_NAME, process.env.LOG_LEVEL);
   }
 
   /**
@@ -58,7 +58,7 @@ export class ExpressServer {
     return new Promise((resolve: () => void) => {
       createServer(this.app).listen(port, () => {
         this.logger.info(
-          `up and running in ${
+          `🚀 blast off in ${
             process.env.NODE_ENV
           } @: ${hostname()} on port: ${port}}`
         );
