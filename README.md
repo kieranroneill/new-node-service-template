@@ -56,7 +56,7 @@ Below is a quick outline of the structure of the app:
 
 ### 1. Prerequisites
 
-* Install [NodeJS 12.13.0+](https://nodejs.org/en/download/).
+* Install [NodeJS 14.15.1+](https://nodejs.org/en/download/).
 * Install [Yarn](https://yarnpkg.com/).
 * Install [Docker](https://docs.docker.com/get-docker/).
 
@@ -97,10 +97,10 @@ When building the Docker image, we want to inject env vars at build time, as the
 ```bash
 docker build \
 -t kieranroneill/new_service_template \
---build-arg NODE_ENV=production \
---build-arg LOG_LEVEL=error \
---build-arg PORT=3000 \
---build-arg SERVICE_NAME=new-service-template \
+--build-arg log_level=error \
+--build-arg node_env=production \
+--build-arg port=3000 \
+--build-arg service_name=new-service-template \
 .
 ```
 
