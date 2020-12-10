@@ -30,11 +30,13 @@ ARG log_level
 ARG node_env
 ARG port
 ARG service_name
+ARG version
 
 ENV LOG_LEVEL=$log_level
 ENV NODE_ENV=$node_env
 ENV PORT=$port
 ENV SERVICE_NAME=$service_name
+ENV VERSION=$version
 
 # Get distro depencdencies
 RUN apk add --no-cache --upgrade bash

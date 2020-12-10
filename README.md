@@ -101,6 +101,7 @@ docker build \
 --build-arg node_env=production \
 --build-arg port=3000 \
 --build-arg service_name=new-service-template \
+--build-arg version=1.0.0 \
 .
 ```
 
