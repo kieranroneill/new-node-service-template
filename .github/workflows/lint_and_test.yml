@@ -1,9 +1,6 @@
 name: Lint and test
 
-on:
-  push:
-    branches-ignore:
-      - main
+on: [pull_request]
 
 jobs:
   lint_and_test:
