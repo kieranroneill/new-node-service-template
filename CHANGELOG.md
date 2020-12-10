@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/kieranroneill/new-node-service-template/compare/v1.1.0...v1.2.0) (2020-12-10)
+
+
+### Features
+
+* adds Dockerfile ([b3e40c2](https://github.com/kieranroneill/new-node-service-template/commit/b3e40c286305e8b48b7ca3afb52c7027de007436))
+
 # [1.1.0](https://github.com/kieranroneill/new-node-service-template/compare/v1.0.0...v1.1.0) (2020-12-10)
 
 
